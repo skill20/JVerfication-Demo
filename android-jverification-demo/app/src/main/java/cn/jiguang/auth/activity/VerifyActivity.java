@@ -24,14 +24,12 @@ import cn.jiguang.auth.utils.ScreenUtils;
 import cn.jiguang.auth.utils.ToastUtil;
 import cn.jiguang.verifysdk.api.JVerificationInterface;
 import cn.jiguang.verifysdk.api.VerifyListener;
-import cn.jiguang.verifysdk.api.VerifySDK;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static cn.jiguang.verifysdk.api.VerifySDK.CODE_VERIFY_EXCEPTION;
 
 
 public class VerifyActivity extends AppCompatActivity implements View.OnClickListener, VerifyListener {
@@ -240,7 +238,7 @@ public class VerifyActivity extends AppCompatActivity implements View.OnClickLis
 
             Log.d(TAG,"response code = "+code+  " ，msg = "+responseData);
             if (code != 200){
-                code = VerifySDK.CODE_NET_EXCEPTION;
+                code = 2013;
                 content = "net error";
             }else  if (responseData != null){
                 Log.d(TAG, "verify number, code=" + code + " content=" +responseData);
@@ -280,13 +278,13 @@ public class VerifyActivity extends AppCompatActivity implements View.OnClickLis
                     content = "bad server";
                 }
             } else {
-                code = CODE_VERIFY_EXCEPTION;
+                code = 2013;
                 content = "http error, can't get response";
             }
 
         } catch (Throwable e){
             Log.w(TAG, "phone validate e:" + e);
-            code = CODE_VERIFY_EXCEPTION;
+            code = 2013;
             content = e.toString();
         }
 
